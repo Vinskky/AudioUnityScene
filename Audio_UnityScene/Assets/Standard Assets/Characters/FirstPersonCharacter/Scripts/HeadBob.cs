@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+
 using UnityStandardAssets.Utility;
 
 namespace UnityStandardAssets.Characters.FirstPerson
@@ -35,6 +36,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 Camera.transform.localPosition = motionBob.DoHeadBob(rigidbodyFirstPersonController.Velocity.magnitude*(rigidbodyFirstPersonController.Running ? RunningStrideLengthen : 1f));
                 newCameraPosition = Camera.transform.localPosition;
                 newCameraPosition.y = Camera.transform.localPosition.y - jumpAndLandingBob.Offset();
+
             }
             else
             {

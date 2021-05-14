@@ -89,6 +89,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 m_GroundContactNormal;
         private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
 
+        //footstep vars
+        float footstepTimer = 0;
+        public float footstepDelay = 1;
 
         public Vector3 Velocity
         {
@@ -134,6 +137,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_Jump = true;
             }
+
+            //footstep timer
+
         }
 
 

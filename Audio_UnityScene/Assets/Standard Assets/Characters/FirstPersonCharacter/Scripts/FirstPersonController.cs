@@ -43,6 +43,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+        //footsteps
+        public AudioClip[] grassFootstepSounds;
+        public AudioClip[] woodFootstepSounds;
+        public AudioClip[] waterFootstepSounds;
+
+        public string footstepMaterial = "Grass";
+        public int prevFootstep = 0;
+
         // Use this for initialization
         private void Start()
         {
@@ -90,6 +98,46 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource.clip = m_LandSound;
             m_AudioSource.Play();
             m_NextStep = m_StepCycle + .5f;
+        }
+
+        void PlayFootstep()
+        {
+            int i = 0;
+
+            switch (footstepMaterial)
+            {
+                case "Grass":
+                    i = UnityEngine.Random.Range(0, grassFootstepSounds.Length);
+
+                    if (i == prevFootstep)
+                    {
+                        i = (i +1) % grassFootstepSounds.Length;
+                    }
+                    m_AudioSource.PlayOneShot(grassFootstepSounds[i]);
+                    break;
+
+                case "Wood":
+                    i = UnityEngine.Random.Range(0, woodFootstepSounds.Length);
+
+                    if (i == prevFootstep)
+                    {
+                        i = (i + 1) % woodFootstepSounds.Length;
+                    }
+                    m_AudioSource.PlayOneShot(woodFootstepSounds[i]);
+                    break;
+
+                case "Water":
+                    i = UnityEngine.Random.Range(0, waterFootstepSounds.Length);
+
+                    if (i == prevFootstep)
+                    {
+                        i = (i + 1) % waterFootstepSounds.Length;
+                    }
+                    m_AudioSource.PlayOneShot(waterFootstepSounds[i]);
+                    break;
+            }
+
+            prevFootstep = i;
         }
 
 
@@ -157,7 +205,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_NextStep = m_StepCycle + m_StepInterval;
 
-            PlayFootStepAudio();
+            PlayFootstep();
         }
 
 
@@ -255,6 +303,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 return;
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
+        }
+        void OnCollisionEnter(Collision coll)
+        {
+            string tag = coll.gameObject.tag;
+
+            switch (tag)
+            {
+                case "Grass":
+                    footstepMaterial = tag;
+                    break;
+                case "Wood":
+                    footstepMaterial = tag;
+                    break;
+                case "Water":
+                    footstepMaterial = tag;
+                    break;
+            }
         }
     }
 }
