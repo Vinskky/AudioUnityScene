@@ -18,7 +18,7 @@ namespace UnityStandardAssets.Utility
         private void OnEnable()
         {
             // active object starts from first in array
-           // m_CurrentActiveObject = 0;
+            m_CurrentActiveObject = 0;
             //camSwitchButton.text = objects[m_CurrentActiveObject].name;
         }
 
