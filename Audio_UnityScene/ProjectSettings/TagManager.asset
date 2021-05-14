@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Grass
+  - Wood
+  - Water
+  - Inside
+  - Hay
   layers:
   - Default
   - TransparentFX

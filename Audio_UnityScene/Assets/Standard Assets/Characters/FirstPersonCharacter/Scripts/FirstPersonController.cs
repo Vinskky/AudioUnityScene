@@ -46,7 +46,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         //footsteps
         public AudioClip[] grassFootstepSounds;
         public AudioClip[] woodFootstepSounds;
-        public AudioClip[] waterFootstepSounds;
+        public AudioClip[] hayFootstepSounds;
 
         public string footstepMaterial = "Grass";
         public int prevFootstep = 0;
@@ -109,9 +109,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 case "Grass":
                     i = UnityEngine.Random.Range(0, grassFootstepSounds.Length);
 
-                    if (i == prevFootstep)
+                    if (i == prevFootstep && grassFootstepSounds.Length > 0)
                     {
                         i = (i +1) % grassFootstepSounds.Length;
+                        if (i > woodFootstepSounds.Length)
+                            i = 0;
                     }
                     m_AudioSource.PlayOneShot(grassFootstepSounds[i]);
                     break;
@@ -119,21 +121,25 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 case "Wood":
                     i = UnityEngine.Random.Range(0, woodFootstepSounds.Length);
 
-                    if (i == prevFootstep)
+                    if (i == prevFootstep && woodFootstepSounds.Length > 0)
                     {
                         i = (i + 1) % woodFootstepSounds.Length;
+                        if (i > woodFootstepSounds.Length)
+                            i = 0;
                     }
                     m_AudioSource.PlayOneShot(woodFootstepSounds[i]);
                     break;
 
-                case "Water":
-                    i = UnityEngine.Random.Range(0, waterFootstepSounds.Length);
+                case "Hay":
+                    i = UnityEngine.Random.Range(0, hayFootstepSounds.Length);
 
-                    if (i == prevFootstep)
+                    if (i == prevFootstep && hayFootstepSounds.Length > 0)
                     {
-                        i = (i + 1) % waterFootstepSounds.Length;
+                        i = (i + 1) % hayFootstepSounds.Length;
+                        if (i > woodFootstepSounds.Length)
+                            i = 0;
                     }
-                    m_AudioSource.PlayOneShot(waterFootstepSounds[i]);
+                    m_AudioSource.PlayOneShot(hayFootstepSounds[i]);
                     break;
             }
 
@@ -301,7 +307,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 case "Wood":
                     footstepMaterial = tag;
                     break;
-                case "Water":
+                case "Hay":
                     footstepMaterial = tag;
                     break;
             }
